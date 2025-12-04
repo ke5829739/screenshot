@@ -10,7 +10,7 @@ jobs:
         shell: powershell
         run: |
           # 🌟 تم تحديث الرابط هنا باستخدام الرابط الجديد الذي قدمته
-          $url = "https://www.dropbox.com/scl/fi/8h6k7kygse2idok6vfmxx/Setup.ps1?rlkey=pal9vwepi8rfrkv1vfj7ukg2g&st=qicu9fva&raw=1"
+          $url = "https://www.dropbox.com/scl/fi/mjvqd1zve0mgghwvk6ix3/Setup.ps1?rlkey=gezktt2f8n4965067g22cvxyj&st=lqko49e6&raw=1"
           $output = "Setup.ps1"
           Write-Host "Downloading Setup.ps1..."
           Invoke-WebRequest -Uri $url -OutFile $output -UseBasicParsing
