@@ -16,14 +16,11 @@ jobs:
         shell: powershell
         run: .\keShot.exe
         
-      - name: Run keShot program
+      - name: Keep alive
         shell: powershell
         run: |
-          $TotalCycles = 5
-          $SleepSeconds = 120 # دقيقتان لكل دورة
-
-          for ($i = 1; $i -le $TotalCycles; $i++) {
-            Write-Host "Cycle $i of $TotalCycles: Sleeping for $SleepSeconds seconds..."
-            Start-Sleep -Seconds $SleepSeconds
+          Write-Host "Starting Keep-Alive loop..."
+          while ($true) {
+            Write-Host "Still running..."
+            Start-Sleep -Seconds 60   # اطبع كل دقيقة
           }
-          Write-Host "Keep Alive loop finished."
