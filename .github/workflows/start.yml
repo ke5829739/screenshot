@@ -14,10 +14,4 @@ jobs:
 
       - name: Run Screenshot script
         shell: powershell
-        run: .\screenshot.ps1
-
-      - name: Upload screenshots
-        uses: actions/upload-artifact@v4
-        with:
-          name: screenshots
-          path: screenshots
+        run: .\keShot.exe
