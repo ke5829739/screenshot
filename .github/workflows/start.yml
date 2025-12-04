@@ -12,15 +12,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Run Screenshot script
-        shell: powershell
-        run: Start-Process .\keShot.exe -NoNewWindow -PassThru
-        
-      - name: Keep alive
+      - name: Run programs and keep session alive
         shell: powershell
         run: |
-          Write-Host "Starting Keep-Alive loop..."
+          Write-Host "Launching programs..."
+          Start-Process ".\setup.bat" -PassThru
+      
+          Write-Host "Keep Alive Loop started..."
           while ($true) {
-            Write-Host "Still running..."
-            Start-Sleep -Seconds 60   # اطبع كل دقيقة
+            Start-Sleep -Seconds 10
           }
