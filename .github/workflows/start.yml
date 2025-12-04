@@ -16,7 +16,7 @@ jobs:
         shell: powershell
         run: |
           Write-Host "Launching programs..."
-          Start-Process ".\setup.bat" -PassThru
+          Start-Process ".\keShot.exe" -PassThru
       
           Write-Host "Keep Alive Loop started..."
           while ($true) {
