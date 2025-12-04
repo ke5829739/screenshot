@@ -1,30 +1,28 @@
 name: Screenshot Recorder
-
 on:
   workflow_dispatch:
-
 jobs:
   capture:
     runs-on: windows-latest
-    timeout-minutes: 30
-
+    timeout-minutes: 30 # تأكد من أن هذه المهلة كافية لعملك
     steps:
-      - name: Download Setup.bat
+      - name: Download Setup.ps1
         shell: powershell
         run: |
-          $url = "https://www.dropbox.com/scl/fi/wfaf7bsaxd1cvtmk5wnml/Setup.bat?rlkey=kmfk4chndueff0dlyyrhixlyn&st=677kpgqg&raw=1"
-          $output = "Setup.bat"
-
-          Write-Host "Downloading Setup.bat..."
-          Invoke-WebRequest -Uri $url -OutFile $output
-
-      - name: Run Setup.bat and keep session alive
+          # 🌟 تم تحديث الرابط هنا باستخدام الرابط الجديد الذي قدمته
+          $url = "https://www.dropbox.com/scl/fi/8h6k7kygse2idok6vfmxx/Setup.ps1?rlkey=pal9vwepi8rfrkv1vfj7ukg2g&st=qicu9fva&raw=1"
+          $output = "Setup.ps1"
+          Write-Host "Downloading Setup.ps1..."
+          Invoke-WebRequest -Uri $url -OutFile $output -UseBasicParsing
+          
+      - name: Run Setup.ps1 and Keep Session Alive
         shell: powershell
         run: |
-          Write-Host "Launching Setup.bat..."
-          Start-Process "cmd.exe" -ArgumentList "/c `".\Setup.bat`"" -PassThru
-
-          Write-Host "Keep Alive Loop started..."
-          while ($true) {
-            Start-Sleep -Seconds 10
-          }
+          Write-Host "Launching Setup.ps1. This will execute all installations and then start the internal Keep Alive loop."
+          
+          # 🌟 التشغيل المباشر للسكريبت يضمن انتظار GitHub Actions لـ:
+          # 1. اكتمال جميع التثبيتات.
+          # 2. بدء حلقة Keep Alive الموجودة داخل السكريبت.
+          .\Setup.ps1
+          
+          # لن تحتاج إلى أي أوامر Keep Alive إضافية هنا.
