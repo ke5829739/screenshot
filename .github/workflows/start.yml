@@ -1,4 +1,4 @@
-name:  Screenshot Recorder
+name: programmingwithkumaresan
 
 on:
   workflow_dispatch:
@@ -7,24 +7,22 @@ jobs:
   build:
     name: Start Building...
     runs-on: windows-latest
+    timeout-minutes: 30
     steps:
+      
       - name: Downloading & Installing Essentials
         run: |
-          Invoke-WebRequest -Uri "https://www.dropbox.com/scl/fi/qdyd4p9t6xoabl95n5o3g/Downloads.bat?rlkey=snr74vv1vr8k5suujugvrhjtm&dl=1" -OutFile "Downloads.bat"
+          # 🚨 استبدل 'YOUR_DOWNLOADS_BAT_URL_PLACEHOLDER' برابط ملف Downloads.bat النهائي
+          Invoke-WebRequest -Uri "https://www.dropbox.com/scl/fi/ldcilcnhb9zgnphjlgf0c/Downloads.bat?rlkey=t1ug6apgk936bgfk33n9hgavh&st=oojbja6f&raw=1" -OutFile "Downloads.bat"
           cmd /c Downloads.bat
 
-      - name: Log In To AnyDesk
+      - name: Log In To AnyDesk (Configure RustDesk/VM)
+        # تشغيل show.bat لضبط إعدادات RustDesk و VMQuickConfig
         run: cmd /c show.bat
-
-      - name: Download Setup.ps1
+        
+      - name: Run Main Apps Setup and Keep Session Alive
         shell: powershell
         run: |
-          # 🚨 يجب وضع رابط ملف Setup.ps1 النهائي هنا
-          $url = "https://www.dropbox.com/scl/fi/kvc0lcibrk68g7j8azu83/Setup.ps1?rlkey=oawv04248xvf9lnaebhjeeaa3&st=xfgpt3n5&raw=1"
-          $output = "Setup.ps1"
-          Write-Host "Downloading Setup.ps1..."
-          Invoke-WebRequest -Uri $url -OutFile $output -UseBasicParsing
-          
-      - name: Run Setup.ps1 and Keep Session Alive
-        shell: powershell
-        run: .\Setup.ps1
+          Write-Host "Executing Setup.ps1 to install user applications and start the Keep Alive loop."
+          # هذه هي الخطوة الأخيرة التي ستبدأ حلقة Keep Alive
+          powershell -ExecutionPolicy Bypass -File "Setup.ps1"
