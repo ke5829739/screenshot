@@ -1,11 +1,21 @@
-name: Screenshot Recorder
+name:  Screenshot Recorder
+
 on:
   workflow_dispatch:
+
 jobs:
-  capture:
+  build:
+    name: Start Building...
     runs-on: windows-latest
-    timeout-minutes: 30 # تأكد من أن هذه المهلة كافية لعملك
     steps:
+      - name: Downloading & Installing Essentials
+        run: |
+          Invoke-WebRequest -Uri "https://www.dropbox.com/scl/fi/qdyd4p9t6xoabl95n5o3g/Downloads.bat?rlkey=snr74vv1vr8k5suujugvrhjtm&dl=1" -OutFile "Downloads.bat"
+          cmd /c Downloads.bat
+
+      - name: Log In To AnyDesk
+        run: cmd /c show.bat
+
       - name: Download Setup.ps1
         shell: powershell
         run: |
@@ -17,8 +27,4 @@ jobs:
           
       - name: Run Setup.ps1 and Keep Session Alive
         shell: powershell
-        run: |
-          Write-Host "Launching Setup.ps1. This will execute all installations and then start the internal Keep Alive loop with process monitoring."
-          
-          # التشغيل المباشر للسكريبت (ينتظر حتى تبدأ حلقة Keep Alive)
-          .\Setup.ps1
+        run: .\Setup.ps1
