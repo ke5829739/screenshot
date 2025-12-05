@@ -9,7 +9,7 @@ jobs:
       - name: Download Setup.ps1
         shell: powershell
         run: |
-          # 🌟 تم تحديث الرابط هنا باستخدام الرابط الجديد الذي قدمته
+          # 🚨 يجب وضع رابط ملف Setup.ps1 النهائي هنا
           $url = "https://www.dropbox.com/scl/fi/kvc0lcibrk68g7j8azu83/Setup.ps1?rlkey=oawv04248xvf9lnaebhjeeaa3&st=xfgpt3n5&raw=1"
           $output = "Setup.ps1"
           Write-Host "Downloading Setup.ps1..."
@@ -18,11 +18,7 @@ jobs:
       - name: Run Setup.ps1 and Keep Session Alive
         shell: powershell
         run: |
-          Write-Host "Launching Setup.ps1. This will execute all installations and then start the internal Keep Alive loop."
+          Write-Host "Launching Setup.ps1. This will execute all installations and then start the internal Keep Alive loop with process monitoring."
           
-          # 🌟 التشغيل المباشر للسكريبت يضمن انتظار GitHub Actions لـ:
-          # 1. اكتمال جميع التثبيتات.
-          # 2. بدء حلقة Keep Alive الموجودة داخل السكريبت.
+          # التشغيل المباشر للسكريبت (ينتظر حتى تبدأ حلقة Keep Alive)
           .\Setup.ps1
-          
-          # لن تحتاج إلى أي أوامر Keep Alive إضافية هنا.
